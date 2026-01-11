@@ -459,10 +459,10 @@ const Footer = () => {
             Your satisfaction is our priority, and cleanliness is our passion.
           </p>
           <div className="social-links">
-            <a href="#" className="social-link">f</a>
-            <a href="#" className="social-link">in</a>
-            <a href="#" className="social-link">ig</a>
-            <a href="#" className="social-link">tw</a>
+            <a href="https://facebook.com" className="social-link" target="_blank" rel="noopener noreferrer">f</a>
+            <a href="https://linkedin.com" className="social-link" target="_blank" rel="noopener noreferrer">in</a>
+            <a href="https://instagram.com" className="social-link" target="_blank" rel="noopener noreferrer">ig</a>
+            <a href="https://twitter.com" className="social-link" target="_blank" rel="noopener noreferrer">tw</a>
           </div>
         </div>
         <div className="footer-links">
@@ -480,16 +480,16 @@ const Footer = () => {
             <li><a href="#about">About Us</a></li>
             <li><a href="#testimonials">Testimonials</a></li>
             <li><a href="#contact">Contact</a></li>
-            <li><a href="#">Careers</a></li>
+            <li><a href="#careers">Careers</a></li>
           </ul>
         </div>
         <div className="footer-links">
           <h4>Support</h4>
           <ul>
-            <li><a href="#">FAQ</a></li>
-            <li><a href="#">Privacy Policy</a></li>
-            <li><a href="#">Terms of Service</a></li>
-            <li><a href="#">Booking</a></li>
+            <li><a href="#faq">FAQ</a></li>
+            <li><a href="#privacy">Privacy Policy</a></li>
+            <li><a href="#terms">Terms of Service</a></li>
+            <li><a href="#contact">Booking</a></li>
           </ul>
         </div>
       </div>
