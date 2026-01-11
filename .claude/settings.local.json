@@ -1,9 +1,20 @@
 {
   "permissions": {
     "allow": [
+      "Bash(git clone:*)",
       "Bash(git init:*)",
       "Bash(git remote add:*)",
-      "Bash(git add:*)"
+      "Bash(git fetch:*)",
+      "Bash(git checkout:*)",
+      "Bash(move .claudesettings.local.json settings.local.json.bak)",
+      "Bash(move:*)",
+      "Bash(npm install)",
+      "Bash(npm start)",
+      "Bash(npx react-scripts start)",
+      "Bash(taskkill:*)",
+      "Bash(git add:*)",
+      "Bash(git commit -m \"$\\(cat <<''EOF''\nFix accessibility issues with anchor href attributes\n\n- Added proper URLs for social media links\n- Fixed footer navigation links with valid anchor targets\n- Resolves ESLint jsx-a11y/anchor-is-valid warnings\n- Ensures clean build for Netlify deployment\n\nCo-Authored-By: Claude Sonnet 4.5 <noreply@anthropic.com>\nEOF\n\\)\")",
+      "Bash(git push:*)"
     ]
   }
 }
