@@ -721,6 +721,15 @@ nav.scrolled {
   min-height: 120px;
 }
 
+.form-row {
+  display: flex;
+  gap: 1rem;
+}
+
+.form-row .form-group {
+  flex: 1;
+}
+
 .submit-btn {
   width: 100%;
   background: var(--deep-sage);
@@ -737,6 +746,28 @@ nav.scrolled {
 .submit-btn:hover {
   background: var(--charcoal);
   transform: translateY(-2px);
+}
+
+.submit-btn:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+  transform: none;
+}
+
+.form-success {
+  text-align: center;
+  padding: 2rem;
+}
+
+.form-success h3 {
+  color: var(--deep-sage);
+  margin-bottom: 0.5rem;
+  font-size: 1.5rem;
+}
+
+.form-success p {
+  color: var(--warm-gray);
+  margin-bottom: 1.5rem;
 }
 
 /* Footer */

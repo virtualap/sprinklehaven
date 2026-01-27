@@ -322,8 +322,13 @@ const ContactForm = () => {
     email: '',
     phone: '',
     service: '',
+    homeSize: '',
+    bedrooms: '',
+    bathrooms: '',
+    cleanType: '',
     message: ''
   });
+  const [status, setStatus] = useState(null);
 
   const handleChange = (e) => {
     setFormData({
@@ -334,18 +339,46 @@ const ContactForm = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    alert('Thank you for your inquiry! We\'ll get back to you within 24 hours.');
-    setFormData({
-      name: '',
-      email: '',
-      phone: '',
-      service: '',
-      message: ''
-    });
+    setStatus('submitting');
+
+    const body = new URLSearchParams({
+      'form-name': 'contact',
+      ...formData
+    }).toString();
+
+    fetch('/', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+      body
+    })
+      .then((res) => {
+        if (!res.ok) throw new Error('Form submission failed');
+        setStatus('success');
+        setFormData({ name: '', email: '', phone: '', service: '', homeSize: '', bedrooms: '', bathrooms: '', cleanType: '', message: '' });
+      })
+      .catch(() => {
+        setStatus('error');
+      });
   };
 
+  if (status === 'success') {
+    return (
+      <div className="form-success">
+        <h3>Thank you for your inquiry!</h3>
+        <p>We'll get back to you within 24 hours.</p>
+        <button className="submit-btn" onClick={() => setStatus(null)}>
+          Send Another Request
+        </button>
+      </div>
+    );
+  }
+
   return (
-    <form onSubmit={handleSubmit}>
+    <form name="contact" method="POST" data-netlify="true" netlify-honeypot="bot-field" onSubmit={handleSubmit}>
+      <input type="hidden" name="form-name" value="contact" />
+      <p hidden>
+        <label>Don't fill this out: <input name="bot-field" /></label>
+      </p>
       <div className="form-group">
         <label>Name</label>
         <input
@@ -395,6 +428,56 @@ const ContactForm = () => {
         </select>
       </div>
       <div className="form-group">
+        <label>Home Size (approx sq ft)</label>
+        <input
+          type="text"
+          name="homeSize"
+          value={formData.homeSize}
+          onChange={handleChange}
+          placeholder="e.g. 1,500"
+          required
+        />
+      </div>
+      <div className="form-row">
+        <div className="form-group">
+          <label>Bedrooms</label>
+          <input
+            type="number"
+            name="bedrooms"
+            value={formData.bedrooms}
+            onChange={handleChange}
+            placeholder="0"
+            min="0"
+            required
+          />
+        </div>
+        <div className="form-group">
+          <label>Bathrooms</label>
+          <input
+            type="number"
+            name="bathrooms"
+            value={formData.bathrooms}
+            onChange={handleChange}
+            placeholder="0"
+            min="0"
+            required
+          />
+        </div>
+      </div>
+      <div className="form-group">
+        <label>Type of Clean</label>
+        <select
+          name="cleanType"
+          value={formData.cleanType}
+          onChange={handleChange}
+          required
+        >
+          <option value="">Select type of clean</option>
+          <option value="deep">First-Time Deep Clean</option>
+          <option value="maintenance">Regular Maintenance</option>
+        </select>
+      </div>
+      <div className="form-group">
         <label>Message</label>
         <textarea
           name="message"
@@ -404,7 +487,14 @@ const ContactForm = () => {
           required
         />
       </div>
-      <button type="submit" className="submit-btn">Request Quote</button>
+      {status === 'error' && (
+        <p style={{ color: '#e74c3c', marginBottom: '1rem' }}>
+          Something went wrong. Please try again or email us directly.
+        </p>
+      )}
+      <button type="submit" className="submit-btn" disabled={status === 'submitting'}>
+        {status === 'submitting' ? 'Sending...' : 'Request Quote'}
+      </button>
     </form>
   );
 };
@@ -427,7 +517,7 @@ const Contact = () => {
             </div>
             <div className="contact-item">
               <div className="contact-icon">📧</div>
-              <span>info@sprinklehavencleaning.com</span>
+              <span>hello@sprinklehavecleaning.com</span>
             </div>
             <div className="contact-item">
               <div className="contact-icon">📍</div>
